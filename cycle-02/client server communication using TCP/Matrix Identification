@@ -1,1 +1,29 @@
 
+client.py
+
+import socket
+import pickle
+
+s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+s.connect(("localhost",5060))
+
+n=int(input("Enter the order of matrix:"))
+matrix=[]
+
+print("enter the elements of matrix:")
+
+for i in range(n):
+  row=list(map(int,input().split()))
+  matrix.append(row)
+print("\nMatrix:")
+
+for row in matrix:
+ print(*row)
+data=pickle.dumps((n,matrix))
+s.send(data)
+
+result=s.recv(1024).decode()
+print("matrix type:",result)
+s.close()
+
+server.py

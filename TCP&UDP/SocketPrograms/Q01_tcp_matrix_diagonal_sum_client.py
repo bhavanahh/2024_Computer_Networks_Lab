@@ -7,4 +7,6 @@ s = socket.socket()
 s.connect(("localhost", 5000))
 s.send(json.dumps(a).encode())
 print("Diagonal sum:", s.recv(1024).decode())
+
+
 s.close()
